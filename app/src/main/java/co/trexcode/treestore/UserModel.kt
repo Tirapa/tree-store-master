@@ -4,8 +4,7 @@ package co.trexcode.treestore
 object UserModel {
 
     data class User(
-        val code: Int,
-        val `data`: Data,
+        val code: Int, 
         val message: String
     )
 
