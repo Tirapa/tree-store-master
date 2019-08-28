@@ -108,7 +108,7 @@ class BasketDetailActivity : AppCompatActivity() {
         retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://10.51.93.187/tree_store/")
+            .baseUrl("http://10.51.40.213/tree_store/")
             .build()
     }
 
@@ -133,7 +133,7 @@ class BasketDetailActivity : AppCompatActivity() {
         txtPriceFull.text = ThaiBaht().getText(price * amount)
         Glide
             .with(this)
-            .load("http://192.168.1.38/tree_store/uploads/$picture")
+            .load("http://10.51.40.213/tree_store/uploads/$picture")
             .into(imageView)
 
         btnAdd.setOnClickListener {

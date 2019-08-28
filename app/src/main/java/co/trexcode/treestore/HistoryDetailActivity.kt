@@ -89,7 +89,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://10.51.93.187/tree_store/")
+            .baseUrl("http://10.51.40.213/tree_store/")
             .build()
 
 
@@ -142,7 +142,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
         Glide
             .with(this)
-            .load("http://10.51.93.187/tree_store/uploads/${mDataResult.picture}")
+            .load("http://10.51.40.213/tree_store/uploads/${mDataResult.picture}")
             .into(imageView)
     }
 

@@ -105,7 +105,7 @@ class OrderAdapter(private val list: ArrayList<Any>) :
         view.txtBasketName.text = item.name
         view.txtBasgetAmount.text = "${item.price.toInt()} บาท X ${item.amount} ต้น"
         view.txtTotal.text = "${item.price.toInt() * item.amount}"
-        Glide.with(view.context).load("http://10.51.93.187/tree_store/uploads/${item.picture}")
+        Glide.with(view.context).load("http://10.51.40.213/tree_store/uploads/${item.picture}")
             .into(view.imgGoodsImage)
         view.basketItemList.setOnClickListener {
             val intent = Intent(view.context, BasketDetailActivity::class.java).apply {
