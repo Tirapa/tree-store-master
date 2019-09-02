@@ -5,7 +5,8 @@ object UserModel {
 
     data class User(
         val code: Int,
-        val message: String
+        val message: String,
+        val data: Data
     )
 
     data class Data(

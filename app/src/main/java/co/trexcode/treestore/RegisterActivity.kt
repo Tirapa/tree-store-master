@@ -43,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
         retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://10.51.40.213/tree_store/")
+            .baseUrl("http://10.51.40.228/tree_store/")
             .build()
     }
 
