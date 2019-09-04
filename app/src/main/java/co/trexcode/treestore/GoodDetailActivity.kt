@@ -60,7 +60,7 @@ class GoodDetailActivity : AppCompatActivity() {
         txtGoodsName.text = name
         Glide
             .with(this)
-            .load("http://10.51.40.228/tree_store/uploads/$picture")
+            .load("http://10.66.231.111/tree_store/uploads/$picture")
             .into(imageView)
 
         txtGoodsPrice.text = "${price}฿"
