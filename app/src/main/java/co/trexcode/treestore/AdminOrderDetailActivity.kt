@@ -57,7 +57,7 @@ class AdminOrderDetailActivity : AppCompatActivity() {
         retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://10.66.231.111/tree_store/")
+            .baseUrl("http://10.66.231.166/tree_store/")
             .build()
 
     }
@@ -110,7 +110,7 @@ class AdminOrderDetailActivity : AppCompatActivity() {
         }
         Glide
             .with(this)
-            .load("http://10.66.231.111/tree_store/uploads/${mDataResult.picture}")
+            .load("http://10.66.231.166/tree_store/uploads/${mDataResult.picture}")
             .into(imageView)
         btnCheckDoc.setOnClickListener {
             showDocDialog()
@@ -125,7 +125,7 @@ class AdminOrderDetailActivity : AppCompatActivity() {
         dialog.setContentView(R.layout.dialog_show_doc)
         Glide
             .with(this)
-            .load("http://10.66.231.111/tree_store/uploads/${mDataResult.payment_picture}")
+            .load("http://10.66.231.166/tree_store/uploads/${mDataResult.payment_picture}")
             .into(dialog.imageDoc)
         dialog.show()
     }

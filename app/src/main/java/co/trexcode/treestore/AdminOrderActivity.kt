@@ -143,7 +143,7 @@ class AdminOderDapter(private val list: List<PaymentModel.Data>) :
             }
             view.context.startActivity(intent)
         }
-        Glide.with(view.context).load("http://10.66.231.111/tree_store/uploads/${item.picture}")
+        Glide.with(view.context).load("http://10.66.231.166/tree_store/uploads/${item.picture}")
             .into(view.imgGoodsImage)
         if (item.status == "1") {
             view.txtStatus.text = "รอการตรวจสอบ"

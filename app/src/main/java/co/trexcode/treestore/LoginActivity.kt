@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://10.66.231.111/tree_store/")
+            .baseUrl("http://10.66.231.166/tree_store/")
             .build()
     }
 
