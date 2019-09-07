@@ -9,11 +9,11 @@ import retrofit2.http.*
 
 interface APIsService {
 
-    @GET("index.php?apis=goods")
+    @GET("index_3.php?apis=goods")
     fun getGoods(): Observable<GoodsModel.Goods>
 
     @Multipart
-    @POST("index.php?apis=editGoods")
+    @POST("index_3.php?apis=editGoods")
     fun editGoods(
         @Part image: MultipartBody.Part?,
         @Part("id") id: RequestBody,
@@ -32,7 +32,7 @@ interface APIsService {
     ): Observable<ResponseBody>
 
     @Multipart
-    @POST("index.php?apis=postPayment")
+    @POST("index_3.php?apis=postPayment")
     fun uploadFile(
         @Part image: MultipartBody.Part,
         @Part("userId") userId: RequestBody,
@@ -43,7 +43,7 @@ interface APIsService {
     ): Observable<ResponseBody>
 
     @FormUrlEncoded
-    @POST("index.php?apis=register")
+    @POST("index_3.php?apis=register")
     fun register(
         @Field("username") username: String,
         @Field("password") password: String,
@@ -51,28 +51,28 @@ interface APIsService {
     ): Observable<NormalModel>
 
     @FormUrlEncoded
-    @POST("index.php?apis=login")
+    @POST("index_3.php?apis=login")
     fun login(
         @Field("username") username: String,
         @Field("password") password: String
     ): Observable<UserModel.User>
 
-    @GET("index.php?apis=payments")
+    @GET("index_3.php?apis=payments")
     fun getUserPayment(
         @Query("user_id") user_id: String
     ): Observable<PaymentModel.Payment>
 
-    @GET("index.php?apis=deleteGoods")
+    @GET("index_3.php?apis=deleteGoods")
     fun deleteGoods(
         @Query("id") id: String
     ): Observable<ResponseBody>
 
-    @GET("index.php?apis=payments_detail")
+    @GET("index_3.php?apis=payments_detail")
     fun getPaymentDetail(
         @Query("id") id: String
     ): Observable<PaymentDetailModel.Payment>
 
-    @GET("index.php?apis=confirmPayment")
+    @GET("index_3.php?apis=confirmPayment")
     fun getConfirmPayment(
         @Query("id") id: String
     ): Observable<ResponseBody>

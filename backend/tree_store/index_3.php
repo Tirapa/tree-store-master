@@ -1,13 +1,15 @@
 <?php
 
 include ("constants.php");
-$con = mysqli_connect("localhost", "root", " ", "db_tree_store");
+$con = mysqli_connect("localhost", "id10799440_db_tree_store", "123456", "id10799440_db_tree_store");
 
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}  else {
+} else {
     echo "connect successfull";
 
+
+$con->query('SET NAMES UTF8');
 
 if (isset($_GET['apis'])) {
 
@@ -18,7 +20,8 @@ if (isset($_GET['apis'])) {
                 SELECT *, goods.picture AS goods_picture, payment.id AS payment_id, payment.picture AS payment_picture FROM payment 
                 LEFT JOIN goods ON goods.id = payment.goods_id
                 WHERE payment.id = '{$_GET['id']}' 
-                ORDER BY payment.id DESC";
+                ORDER BY payment.id DESC
+        ";
         $result = $con->query($strCmd);
         $data = [];
         while ($row = $result->fetch_assoc()) {
@@ -126,7 +129,10 @@ if (isset($_GET['apis'])) {
                     '{$_POST['username']}', 
                     '{$_POST['password']}', 
                     '{$_POST['name']}', 
-                    '1.jpg', '1')";
+                    '1.jpg', 
+                    '1'
+                )
+            ";
             $result = $con->query($strCmd);
             if ($result) {
                 $response['data'] = [];
@@ -179,8 +185,9 @@ if (isset($_GET['apis'])) {
                     '{$_POST['amount']}', 
                     '{$_FILES['upload']['name']}',
                     '{$_POST['datetime']}',
-                    '{$_POST['status']}')";
-        
+                    '{$_POST['status']}'
+                )
+        ";
         $result = $con->query($strCmd);
         if ($result) {
             $response['data'] = [];
@@ -203,7 +210,9 @@ if (isset($_GET['apis'])) {
                     '{$_POST['name']}',
                     '{$_POST['detail']}',
                     '{$_POST['price']}',
-                    '{$_FILES['upload']['name']}')";
+                    '{$_FILES['upload']['name']}'
+                )
+        ";
         $result = $con->query($strCmd);
         if ($result) {
             $response['data'] = [];
@@ -253,16 +262,15 @@ if (isset($_GET['apis'])) {
             $response['code'] = 200;
             $response['message'] = "OK";
         }
-        
-    
-        } else {
-            $response['data'] = [];
-            $response['code'] = 404;
-            $response['message'] = "Not found";
+        echo json_encode($response);
     }
+
+} else {
+    $response['data'] = [];
+    $response['code'] = 404;
+    $response['message'] = "Not found";
     echo json_encode($response);
-    
 }
 
-?>
 
+?>

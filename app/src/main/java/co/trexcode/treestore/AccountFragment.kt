@@ -113,7 +113,7 @@ class MenuAdepter(private val list: List<AccountMenu>) :
             when {
                 item.image == R.drawable.ic_turn_off -> {
                     Toast.makeText(context, "คุณได้ออกจากระบบเรียบร้อยแล้ว", Toast.LENGTH_SHORT).show()
-                    val          tinyDB = TinyDB(context)
+                    val tinyDB = TinyDB(context)
                     tinyDB.putBoolean("IS_LOGIN", false)
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
