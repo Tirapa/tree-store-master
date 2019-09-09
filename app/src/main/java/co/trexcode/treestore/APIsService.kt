@@ -9,11 +9,11 @@ import retrofit2.http.*
 
 interface APIsService {
 
-    @GET("index_3.php?apis=goods")
+    @GET("goods.php?REQUEST_METHOD=goods")
     fun getGoods(): Observable<GoodsModel.Goods>
 
     @Multipart
-    @POST("index_3.php?apis=editGoods")
+    @POST("editGoods.php?REQUEST_METHOD=editGoods")
     fun editGoods(
         @Part image: MultipartBody.Part?,
         @Part("id") id: RequestBody,
@@ -23,7 +23,7 @@ interface APIsService {
     ): Observable<ResponseBody>
 
     @Multipart
-    @POST("index.php?apis=addGoods")
+    @POST("addGoods.php?REQUEST_METHOD=addGoods")
     fun addGoods(
         @Part image: MultipartBody.Part?,
         @Part("name") name: RequestBody,
@@ -32,7 +32,7 @@ interface APIsService {
     ): Observable<ResponseBody>
 
     @Multipart
-    @POST("index_3.php?apis=postPayment")
+    @POST("postPayment.php?REQUEST_METHOD=postPayment")
     fun uploadFile(
         @Part image: MultipartBody.Part,
         @Part("userId") userId: RequestBody,
@@ -43,7 +43,7 @@ interface APIsService {
     ): Observable<ResponseBody>
 
     @FormUrlEncoded
-    @POST("index_3.php?apis=register")
+    @POST("register.php?REQUEST_METHOD=register")
     fun register(
         @Field("username") username: String,
         @Field("password") password: String,
@@ -51,28 +51,28 @@ interface APIsService {
     ): Observable<NormalModel>
 
     @FormUrlEncoded
-    @POST("index_3.php?apis=login")
+    @POST("login.php?REQUEST_METHOD=login")
     fun login(
         @Field("username") username: String,
         @Field("password") password: String
     ): Observable<UserModel.User>
 
-    @GET("index_3.php?apis=payments")
+    @GET("payments.php?REQUEST_METHOD=payments")
     fun getUserPayment(
         @Query("user_id") user_id: String
     ): Observable<PaymentModel.Payment>
 
-    @GET("index_3.php?apis=deleteGoods")
+    @GET("deleteGoods.php?REQUEST_METHOD=deleteGoods")
     fun deleteGoods(
         @Query("id") id: String
     ): Observable<ResponseBody>
 
-    @GET("index_3.php?apis=payments_detail")
+    @GET("payments_detail.php?REQUEST_METHOD=payments_detail")
     fun getPaymentDetail(
         @Query("id") id: String
     ): Observable<PaymentDetailModel.Payment>
 
-    @GET("index_3.php?apis=confirmPayment")
+    @GET("confirmPayment.php?REQUEST_METHOD=confirmPayment")
     fun getConfirmPayment(
         @Query("id") id: String
     ): Observable<ResponseBody>

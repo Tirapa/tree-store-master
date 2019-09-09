@@ -1,13 +1,12 @@
 <?php
 
-include ("constants.php");
-$con = mysqli_connect("localhost", "id10799440_db_tree_store", "123456", "id10799440_db_tree_store");
+$con = mysqli_connect("localhost", "root", "", "db_tree_store");
 
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 } else {
-    echo "connect successfull";
-
+    echo "Connect successfully";
+}
 
 $con->query('SET NAMES UTF8');
 
@@ -16,12 +15,10 @@ if (isset($_GET['apis'])) {
     if ($_GET['apis'] == 'payments_detail') {
 
         $response = [];
-        $strCmd = "
-                SELECT *, goods.picture AS goods_picture, payment.id AS payment_id, payment.picture AS payment_picture FROM payment 
+        $strCmd = "SELECT *, goods.picture AS goods_picture, payment.id AS payment_id, payment.picture AS payment_picture FROM payment 
                 LEFT JOIN goods ON goods.id = payment.goods_id
                 WHERE payment.id = '{$_GET['id']}' 
-                ORDER BY payment.id DESC
-        ";
+                ORDER BY payment.id DESC";
         $result = $con->query($strCmd);
         $data = [];
         while ($row = $result->fetch_assoc()) {
@@ -43,17 +40,15 @@ if (isset($_GET['apis'])) {
 
     if ($_GET['apis'] == 'payments') {
 
+        
+
         $response = [];
-        $strCmd = "
-                SELECT *, goods.picture AS goods_picture, payment.id AS payment_id, payment.picture AS payment_picture FROM payment 
-                LEFT JOIN goods ON goods.id = payment.goods_id 
-        ";
+        $strCmd = "SELECT *, goods.picture AS goods_picture, payment.id AS payment_id, payment.picture AS payment_picture FROM payment 
+                LEFT JOIN goods ON goods.id = payment.goods_id";
         if ($_GET['user_id'] == 'all') {
-            $strCmd .= "
-                ORDER BY payment.id DESC";
+            $strCmd .= "ORDER BY payment.id DESC";
         } else {
-            $strCmd .= "
-                WHERE payment.user_id = '{$_GET['user_id']}' 
+            $strCmd .= "WHERE payment.user_id = '{$_GET['user_id']}' 
                 ORDER BY payment.id DESC";
         }
         $result = $con->query($strCmd);
@@ -97,18 +92,25 @@ if (isset($_GET['apis'])) {
 
     if ($_GET['apis'] == 'login') {
 
-        $response = [];
+        $username = ($_POST['username']);
+        $password = $_POST['password'];
+        $response = mysqli_query($conn, $sql);
 
-        $strIsUser = "SELECT * FROM users WHERE username = '{$_POST['username']}' AND password = '{$_POST['password']}'";
-        $result = $con->query($strIsUser);
-        if ($result->num_rows != 0) {
-            $response['data'] = $result->fetch_assoc();
-            $response['code'] = 200;
-            $response['message'] = "OK";
+        $strCmd = "SELECT * FROM users WHERE username = '{$_POST['username']}' AND password = '{$_POST['password']}'";
+        $result = array();
+        $result['login'] = array();
+        
+        if ($result->mysqli_num_rows($response) != 0) {
+            $row = mysqli_fetch_assoc($response);
+            $index['username'] = $row['username'];
+            array_push($result['login'], $index);
+            $result['success'] = "1";
+            $result['message'] = "success";
+            echo json_encode($result);
         } else {
-            $response['data'] = [];
-            $response['code'] = 404;
-            $response['message'] = "NOT_FOUND";
+            $result['data'] = [];
+            $result['code'] = 404;
+            $result['message'] = "NOT_FOUND";
         }
 
         echo json_encode($response);
@@ -123,16 +125,12 @@ if (isset($_GET['apis'])) {
         $strIsUser = "SELECT * FROM users WHERE username = '{$_POST['username']}'";
         $result = $con->query($strIsUser);
         if ($result->num_rows == 0) {
-            $strCmd = "
-                INSERT INTO users 
-                (username, password, name, picture, status) VALUES(
+            $strCmd = "INSERT INTO users (username, password, name, picture, status) VALUES(
                     '{$_POST['username']}', 
                     '{$_POST['password']}', 
                     '{$_POST['name']}', 
                     '1.jpg', 
-                    '1'
-                )
-            ";
+                    '1')";
             $result = $con->query($strCmd);
             if ($result) {
                 $response['data'] = [];
@@ -177,17 +175,13 @@ if (isset($_GET['apis'])) {
         move_uploaded_file($_FILES["upload"]["tmp_name"], "uploads/" . $_FILES["upload"]["name"]);
 
         $response = [];
-        $strCmd = "
-                INSERT INTO payment 
-                (goods_id, user_id, amount, picture, date_time, status) VALUES(
+        $strCmd = "INSERT INTO payment (goods_id, user_id, amount, picture, date_time, status) VALUES(
                     '{$_POST['goodsId']}', 
                     '{$_POST['userId']}', 
                     '{$_POST['amount']}', 
                     '{$_FILES['upload']['name']}',
                     '{$_POST['datetime']}',
-                    '{$_POST['status']}'
-                )
-        ";
+                    '{$_POST['status']}')";
         $result = $con->query($strCmd);
         if ($result) {
             $response['data'] = [];
@@ -204,15 +198,11 @@ if (isset($_GET['apis'])) {
         move_uploaded_file($_FILES["upload"]["tmp_name"], "uploads/" . $_FILES["upload"]["name"]);
 
         $response = [];
-        $strCmd = "
-                INSERT INTO goods
-                (name, detail, price, picture) VALUES(
+        $strCmd = "INSERT INTO goods(name, detail, price, picture) VALUES(
                     '{$_POST['name']}',
                     '{$_POST['detail']}',
                     '{$_POST['price']}',
-                    '{$_FILES['upload']['name']}'
-                )
-        ";
+                    '{$_FILES['upload']['name']}')";
         $result = $con->query($strCmd);
         if ($result) {
             $response['data'] = [];
@@ -231,12 +221,9 @@ if (isset($_GET['apis'])) {
         }
 
         $response = [];
-        $strCmd = "
-                UPDATE goods SET 
-                 name = '{$_POST['name']}', 
+        $strCmd = "UPDATE goods SET name = '{$_POST['name']}', 
                  detail = '{$_POST['detail']}', 
-                 price = '{$_POST['price']}' 
-        ";
+                 price = '{$_POST['price']}' ";
         if ($_FILES["upload"]["name"]) {
             $strCmd .= ", picture = '{$_FILES['upload']['name']}'";
         }
@@ -273,4 +260,3 @@ if (isset($_GET['apis'])) {
 }
 
 
-?>

@@ -68,7 +68,7 @@ class AdminOrderActivity : AppCompatActivity() {
         retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://10.66.231.111/tree_store/")
+            .baseUrl("http://10.51.183.60/tree_store/")
             .build()
     }
 
@@ -143,7 +143,7 @@ class AdminOderDapter(private val list: List<PaymentModel.Data>) :
             }
             view.context.startActivity(intent)
         }
-        Glide.with(view.context).load("http://10.66.231.166/tree_store/uploads/${item.picture}")
+        Glide.with(view.context).load("http://10.51.183.60/tree_store/uploads/${item.picture}")
             .into(view.imgGoodsImage)
         if (item.status == "1") {
             view.txtStatus.text = "รอการตรวจสอบ"

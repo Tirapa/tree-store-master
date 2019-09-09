@@ -70,7 +70,7 @@ class AdminGoodsList : AppCompatActivity() {
         retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://10.66.231.111/tree_store/")
+            .baseUrl("https://tirapa1995.000webhostapp.com/connect/index_3.php")
             .build()
     }
 
@@ -139,7 +139,7 @@ class AdminGoodsAdapter(private val list: List<GoodsModel.Data>) :
             holder.view.productDivider.visibility = View.GONE
         }
 
-        Glide.with(holder.view.context).load("http://10.66.231.111/tree_store/uploads/${item.picture}")
+        Glide.with(holder.view.context).load("http://10.51.183.60/tree_store/uploads/${item.picture}")
             .into(holder.view.imgGoodsImage)
 
 
